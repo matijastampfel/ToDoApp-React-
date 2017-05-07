@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import TodoList from './TodoList';
 import AddTodo from './AddTodo';
 import TodoSearch from './TodoSearch';
+import uuid from 'node-uuid'; //!! DO NOT DELETE IT, IT IS USED FOR UNIQUE ID's !!
 
 class TodoApp extends Component {
     constructor(props) {
@@ -12,19 +13,19 @@ class TodoApp extends Component {
             searchText: '',
             todos: [
                     {
-            id: 1,
+            id: uuid(),
             text: 'Walk the dog'
         },
             {
-            id: 2,
+            id: uuid(),
             text: 'Clean the yard'
         },
         {
-            id: 3,
+            id: uuid(),
             text: 'Clean house'
         },
         {
-            id: 4,
+            id: uuid(),
             text: 'Code'
         }
             ]
@@ -32,7 +33,15 @@ class TodoApp extends Component {
     }
 
     handleAddTodo (text) {
-            alert('new todo: ' + text);
+            this.setState({
+                todos:[
+                    ...this.state.todos,
+                    {
+                        id: uuid(),
+                        text: text
+                    }
+                ]
+            });
         }
     handleSearch (showCompleted, searchText) {
         this.setState({
@@ -48,7 +57,7 @@ class TodoApp extends Component {
             <div>
             <TodoSearch onSearch={this.handleSearch.bind(this)}/>
             <TodoList todos={this.state.todos}/>
-            <AddTodo onAddTodo={this.handleAddTodo}/>    
+            <AddTodo onAddTodo={this.handleAddTodo.bind(this)}/>    
             </div>
         );
     }
