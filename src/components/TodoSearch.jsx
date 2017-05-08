@@ -12,7 +12,7 @@ class TodoSearch extends Component {
         return (
             <div>
                 <div>
-                <input type="Search" ref="searchText" placeholder="Search todos" onChange={this.handleSearch.bind(this)}/>
+                
                 </div>
                 <div>
                 <label>
